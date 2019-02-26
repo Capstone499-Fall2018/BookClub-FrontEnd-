@@ -44,9 +44,9 @@ export class BookDetailComponent implements OnInit {
 
   interested() {
     this.show = false;
-    const log = localStorage.getItem('loggedIn');
-    const uid = localStorage.getItem('userid');
-    const jwt = localStorage.getItem('user-jwt');
+    const log = sessionStorage.getItem('loggedIn');
+    const uid = sessionStorage.getItem('userid');
+    const jwt = sessionStorage.getItem('user-jwt');
     console.log(uid + ' ' + jwt);
     if (/*log.charAt(0) === 'f' ||*/ jwt === null) {
       this.notLoggedIn = true;

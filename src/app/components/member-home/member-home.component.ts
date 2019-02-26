@@ -91,10 +91,10 @@ export class MemberHomeComponent implements OnInit {
     this.info = false;
   }
   get userid(): any {
-    return localStorage.getItem('userid');
+    return sessionStorage.getItem('userid');
   }
   get username(): any {
-    return localStorage.getItem('username');
+    return sessionStorage.getItem('username');
   }
 
   showForm() {
@@ -151,10 +151,10 @@ export class MemberHomeComponent implements OnInit {
   }
 
   logout() {
-    localStorage.setItem('loggedIn', 'false');
-    localStorage.removeItem('userid');
-    localStorage.removeItem('username');
-    localStorage.removeItem('user-jwt');
+    sessionStorage.setItem('loggedIn', 'false');
+    sessionStorage.removeItem('userid');
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('user-jwt');
     this.router.navigate(['/Home']);
    }
 
@@ -164,7 +164,7 @@ export class MemberHomeComponent implements OnInit {
   }
 
   updatemajor(major, uname) {
-      uname = localStorage.getItem('userid');
+      uname = sessionStorage.getItem('userid');
       this.db.updatemajor(major, uname).subscribe((res: any) => {
           if (res.affectedRows > 0) {
               this.majorupdated = true;
@@ -180,7 +180,7 @@ export class MemberHomeComponent implements OnInit {
   }
 
   updatename(name, uname) {
-      uname = localStorage.getItem('userid');
+      uname = sessionStorage.getItem('userid');
       this.db.updatename(name, uname).subscribe((res: any) => {
           if (res.affectedRows > 0) {
               this.nameupdated = true;
@@ -196,7 +196,7 @@ export class MemberHomeComponent implements OnInit {
   }
 
   updatephonenum(phone, uname) {
-      uname = localStorage.getItem('userid');
+      uname = sessionStorage.getItem('userid');
       this.db.updatephonenum(phone, uname).subscribe((res: any) => {
           if (res.affectedRows > 0) {
               this.phoneupdated = true;
@@ -208,7 +208,7 @@ export class MemberHomeComponent implements OnInit {
 
   displayinfo(uname) {
     this.ngOnInit();
-    uname = localStorage.getItem('userid');
+    uname = sessionStorage.getItem('userid');
     this.db.getMember(uname).subscribe((res: any) => {
         console.log(res);
         this.data = res;

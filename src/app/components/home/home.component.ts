@@ -26,10 +26,10 @@ export class HomeComponent implements OnInit {
     this.db.login(email, password).subscribe((res: any) => {
       console.log(res);
       if (res != null) {
-      localStorage.setItem('loggedIn', 'true');
-      localStorage.setItem('userid', res.Member.uname);
-      localStorage.setItem('username', res.Member.name);
-      localStorage.setItem('user-jwt', res.token);
+      sessionStorage.setItem('loggedIn', 'true');
+      sessionStorage.setItem('userid', res.Member.uname);
+      sessionStorage.setItem('username', res.Member.name);
+      sessionStorage.setItem('user-jwt', res.token);
       }
         },
       error => {
@@ -41,8 +41,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(localStorage.getItem('loggedIn'));
-    if (localStorage.getItem('loggedIn').charAt(0) === 'f' || localStorage.getItem('loggedIn') === null) {
+    console.log(sessionStorage.getItem('loggedIn'));
+    if (/*sessionStorage.getItem('loggedIn').charAt(0) === 'f' ||*/ sessionStorage.getItem('loggedIn') === null) {
       this.show = true;
     } else {
       this.show = false;
