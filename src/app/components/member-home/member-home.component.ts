@@ -106,8 +106,10 @@ export class MemberHomeComponent implements OnInit {
     this.ngOnInit();
     this.db.createBook(isbn, title, author, description, subject, oprice, cprice, this.userid).subscribe((res: any) => {
       console.log(res);
+      if (res.affectedRows > 0) {
+          this.success = true;
+      }
     });
-    this.success = true;
     this.addBookForm.reset();
   }
 
@@ -124,16 +126,20 @@ export class MemberHomeComponent implements OnInit {
     this.ngOnInit();
     this.db.delete(unid).subscribe((res: any) => {
       console.log(res);
+      if (res.affectedRows > 0) {
+          this.deleteSuccess = true;
+      }
     });
-    this.deleteSuccess = true;
   }
 
   deleteIntBook(unid) {
     this.ngOnInit();
     this.db.deleteIntBook(unid).subscribe((res: any) => {
       console.log(res);
+      if (res.affectedRows > 0) {
+          this.deleteSuccess = true;
+      }
     });
-    this.deleteSuccess = true;
   }
 
   settings() {
