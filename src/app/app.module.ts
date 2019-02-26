@@ -17,12 +17,14 @@ import { MatToolbarModule,
     MatCardModule,
     MatTableModule,
     MatDividerModule,
+    MatSnackBarModule,
     MatPaginatorModule} from '@angular/material';
 import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
 import { RegisterComponent } from './components/register/register.component';
 import { MemberHomeComponent } from './components/member-home/member-home.component';
+import { EditBookComponent } from './components/member-home/edit-book/edit-book.component';
 
 const routes: Routes = [
     { path: 'Register', component: RegisterComponent },
@@ -30,8 +32,8 @@ const routes: Routes = [
     { path: 'Detail/:unid', component: BookDetailComponent},
     { path: 'Search', component: SearchComponent },
     { path: 'Member', component: MemberHomeComponent },
+    { path: 'Edit/:unid', component: EditBookComponent },
     { path: '', redirectTo: '/Home', pathMatch: 'full' }
-
 ];
 
 @NgModule({
@@ -41,7 +43,8 @@ const routes: Routes = [
         SearchComponent,
         BookDetailComponent,
         RegisterComponent,
-        MemberHomeComponent
+        MemberHomeComponent,
+        EditBookComponent
     ],
     imports: [
         BrowserModule,
@@ -58,6 +61,7 @@ const routes: Routes = [
         MatOptionModule,
         MatCardModule,
         MatTableModule,
+        MatSnackBarModule,
         MatDividerModule,
         MatPaginatorModule,
         ReactiveFormsModule,

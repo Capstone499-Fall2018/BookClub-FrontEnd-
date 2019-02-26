@@ -72,7 +72,7 @@ export class DBService {
       return this.http.put('http://localhost:4000/client/Interested', {
           member: member,
           book: book,
-          auth_token: localStorage.getItem('user-jwt')
+          auth_token: sessionStorage.getItem('user-jwt')
       });
    }
    interestedMember(member: String) {
@@ -103,4 +103,23 @@ export class DBService {
            uname: uname
        });
    }
+   editBookDetails(unid: String, isbn: String, title: String, author: String, description:
+       String, subject: String, cprice: String, oprice: String, url: String) {
+      return this.http.put('http://localhost:4000/client/editBookDetails', {
+          unid: unid,
+          isbn: isbn,
+          title: title,
+          author: author,
+          description: description,
+          subject: subject,
+          cprice: cprice,
+          oprice: oprice,
+          url: url
+      });
+  }
+  getBookDetails(unid: String) {
+      return this.http.put('http://localhost:4000/client/getBookDetails', {
+          unid: unid
+      });
+  }
 }
