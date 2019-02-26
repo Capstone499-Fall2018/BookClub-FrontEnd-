@@ -1,0 +1,75 @@
+<div *ngIf="show">
+  <h3> Title: {{data?.Title}}</h3>
+  <br>
+  <h3>Author: {{data?.Author}}</h3>
+  <h3>Price: ${{data?.listPrice}}</h3>
+  <h3>Description: {{data?.Description}}</h3>
+  <h3>Owner: {{data?.memberUname}}</h3>
+  <br>
+  <button mat-button type="button" (click)="interested()">I am interested in this book</button>
+</div>
+
+<div *ngIf="notLoggedIn">
+  Please <a href="/Home">login</a> to see owner information
+</div>
+
+<div *ngIf="displayInfo">
+  <h3>Owner: {{member?.uname}}</h3>
+  <h3>Name: {{member?.name}}</h3>
+  <h3>Email: {{member?.email}}</h3>
+  <h3>Phone: {{member?.phone}}</h3>
+</div>
+
+<!--<div>
+  <br>
+  <mat-card>
+    <br><br>
+    <mat-divider></mat-divider>
+    <br>
+    <table mat-table [dataSource]="book">
+      <ng-container matColumnDef="isbn">
+        <th mat-header-cell *matHeaderCellDef> ISBN </th>
+        <td mat-cell *matCellDef="let element"> {{element.Isbn}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let element"> {{element.Title}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="author">
+        <th mat-header-cell *matHeaderCellDef> Author </th>
+        <td mat-cell *matCellDef="let element"> {{element.Author}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="subject">
+        <th mat-header-cell *matHeaderCellDef> Subject </th>
+        <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="origPrice">
+        <th mat-header-cell *matHeaderCellDef> Original Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.origPrice}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="curPrice">
+        <th mat-header-cell *matHeaderCellDef> Current Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.listPrice}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+</mat-card>
+</div>-->
