@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
     this.db.login(email, password).subscribe((res: any) => {
       console.log(res);
       if (res != null) {
-      sessionStorage.setItem('loggedIn', 'true');
       sessionStorage.setItem('userid', res.Member.uname);
       sessionStorage.setItem('username', res.Member.name);
       sessionStorage.setItem('user-jwt', res.token);
@@ -41,8 +40,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(sessionStorage.getItem('loggedIn'));
-    if (/*sessionStorage.getItem('loggedIn').charAt(0) === 'f' ||*/ sessionStorage.getItem('loggedIn') === null) {
+    console.log(sessionStorage.getItem('user-jwt'));
+    if ( sessionStorage.getItem('user-jwt') === null) {
       this.show = true;
     } else {
       this.show = false;

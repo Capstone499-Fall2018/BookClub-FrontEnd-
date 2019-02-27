@@ -25,6 +25,8 @@ import { BookDetailComponent } from './components/book-detail/book-detail.compon
 import { RegisterComponent } from './components/register/register.component';
 import { MemberHomeComponent } from './components/member-home/member-home.component';
 import { EditBookComponent } from './components/member-home/edit-book/edit-book.component';
+import { AddBookComponent } from './components/member-home/add-book/add-book.component';
+import { SettingsComponent } from './components/member-home/settings/settings.component';
 
 const routes: Routes = [
     { path: 'Register', component: RegisterComponent },
@@ -33,6 +35,8 @@ const routes: Routes = [
     { path: 'Search', component: SearchComponent },
     { path: 'Member', component: MemberHomeComponent },
     { path: 'Edit/:unid', component: EditBookComponent },
+    { path: 'Add', component: AddBookComponent },
+    { path: 'Settings', component: SettingsComponent },
     { path: '', redirectTo: '/Home', pathMatch: 'full' }
 ];
 
@@ -44,7 +48,9 @@ const routes: Routes = [
         BookDetailComponent,
         RegisterComponent,
         MemberHomeComponent,
-        EditBookComponent
+        EditBookComponent,
+        AddBookComponent,
+        SettingsComponent
     ],
     imports: [
         BrowserModule,

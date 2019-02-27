@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { DBService } from '../../db.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-member-home',
@@ -10,28 +11,6 @@ import { Router } from '@angular/router';
 })
 export class MemberHomeComponent implements OnInit {
 
-  majorform: boolean;
-  updatemajorform: FormGroup;
-  majorupdated: boolean;
-  nameform: boolean;
-  updatenameform: FormGroup;
-  nameupdated: boolean;
-  phoneform: boolean;
-  updatephonenumform: FormGroup;
-  phoneupdated: boolean;
-  info: boolean;
-  account: boolean;
-  displayMemberColumns = ['uname', 'name', 'major', 'phone', 'email'];
-  data: {
-      Uname: String,
-      Name: String,
-      Major: String,
-      PhoneNum: String,
-      Email: String
-  };
-
-  addBookForm: FormGroup;
-  add: boolean;
   interested: boolean;
   interestedMemberBooks: {
     Isbn: String,
@@ -40,7 +19,6 @@ export class MemberHomeComponent implements OnInit {
   };
   member: any;
   deleteSuccess: boolean;
-  success: boolean;
   showMemberBooks: boolean;
   displayedColumns = ['isbn', 'title', 'author', 'actions'];
   data1: {
@@ -49,68 +27,18 @@ export class MemberHomeComponent implements OnInit {
     Author: String
   };
 
-  constructor(private db: DBService, private fb: FormBuilder, private router: Router) {
-    this.addBookForm = this.fb.group({
-        isbn: ['', Validators.required],
-        title: ['', Validators.required],
-        author: ['', Validators.required],
-        subject: '',
-        description: '',
-        oprice: '',
-        cprice: ''
-    });
-    this.updatemajorform = this.fb.group({
-        major: ['', Validators.required]
-
-    });
-
-    this.updatenameform = this.fb.group({
-        name: ['', Validators.required]
-
-    });
-
-    this.updatephonenumform = this.fb.group({
-        phone: ['', Validators.required]
-
-    });
-  }
+  constructor(private db: DBService, private fb: FormBuilder, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.success = false;
     this.deleteSuccess = false;
-    this.add = false;
     this.showMemberBooks = false;
     this.interested = false;
-    this.majorform = false;
-    this.majorupdated = false;
-    this.nameform = false;
-    this.nameupdated = false;
-    this.phoneupdated = false;
-    this.phoneform = false;
-    this.account = false;
-    this.info = false;
   }
   get userid(): any {
     return sessionStorage.getItem('userid');
   }
   get username(): any {
     return sessionStorage.getItem('username');
-  }
-
-  showForm() {
-    this.ngOnInit();
-    this.add = true;
-  }
-
-  createBook(isbn, title, author, description, subject, oprice, cprice) {
-    this.ngOnInit();
-    this.db.createBook(isbn, title, author, description, subject, oprice, cprice, this.userid).subscribe((res: any) => {
-      console.log(res);
-      if (res.affectedRows > 0) {
-          this.success = true;
-      }
-    });
-    this.addBookForm.reset();
   }
 
   manageBooks() {
@@ -127,7 +55,9 @@ export class MemberHomeComponent implements OnInit {
     this.db.delete(unid).subscribe((res: any) => {
       console.log(res);
       if (res.affectedRows > 0) {
-          this.deleteSuccess = true;
+          this.snackBar.open('Book deleted successfully', 'OK', {
+              duration: 3000
+          });
       }
     });
   }
@@ -137,14 +67,11 @@ export class MemberHomeComponent implements OnInit {
     this.db.deleteIntBook(unid).subscribe((res: any) => {
       console.log(res);
       if (res.affectedRows > 0) {
-          this.deleteSuccess = true;
+          this.snackBar.open('Book deleted successfully', 'OK', {
+              duration: 3000
+          });
       }
     });
-  }
-
-  settings() {
-    this.ngOnInit();
-    this.account = true;
   }
 
   interestedBooks() {
@@ -157,74 +84,9 @@ export class MemberHomeComponent implements OnInit {
   }
 
   logout() {
-    sessionStorage.setItem('loggedIn', 'false');
     sessionStorage.removeItem('userid');
     sessionStorage.removeItem('username');
     sessionStorage.removeItem('user-jwt');
     this.router.navigate(['/Home']);
    }
-
-  displaymajorform() {
-      this.ngOnInit();
-      this.majorform = true;
-  }
-
-  updatemajor(major, uname) {
-      uname = sessionStorage.getItem('userid');
-      this.db.updatemajor(major, uname).subscribe((res: any) => {
-          if (res.affectedRows > 0) {
-              this.majorupdated = true;
-              this.updatemajorform.reset();
-          }
-          console.log(res);
-      });
-  }
-
-  displaynameform() {
-      this.ngOnInit();
-      this.nameform = true;
-  }
-
-  updatename(name, uname) {
-      uname = sessionStorage.getItem('userid');
-      this.db.updatename(name, uname).subscribe((res: any) => {
-          if (res.affectedRows > 0) {
-              this.nameupdated = true;
-              this.updatenameform.reset();
-          }
-          console.log(res);
-      });
-  }
-
-  displayphoneform() {
-      this.ngOnInit();
-      this.phoneform = true;
-  }
-
-  updatephonenum(phone, uname) {
-      uname = sessionStorage.getItem('userid');
-      this.db.updatephonenum(phone, uname).subscribe((res: any) => {
-          if (res.affectedRows > 0) {
-              this.phoneupdated = true;
-              this.updatephonenumform.reset();
-          }
-          console.log(res);
-      });
-  }
-
-  displayinfo(uname) {
-    this.ngOnInit();
-    uname = sessionStorage.getItem('userid');
-    this.db.getMember(uname).subscribe((res: any) => {
-        console.log(res);
-        this.data = res;
-        this.info = true;
-
-    });
-  }
-
-  cancel() {
-      this.ngOnInit();
-  }
-
 }

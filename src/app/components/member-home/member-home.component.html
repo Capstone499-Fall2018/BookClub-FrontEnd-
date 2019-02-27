@@ -1,63 +1,11 @@
 <h3>Welcome home, {{username}}</h3>
 <br><br>
 <button mat-button type="button" routerLink="/Search">Search Books</button>
-<button mat-button type="button" (click)="showForm()">Add a Book</button>
+<button mat-button type="button" routerLink="/Add">Add a Book</button>
 <button mat-button type="button" (click)="manageBooks()">Manage my books</button>
-<button mat-button type="button" (click)="settings()">Account Settings</button>
+<button mat-button type="button" routerLink="/Settings">Account Settings</button>
 <button mat-button type="button" (click)="logout()">Logout</button>
 <button mat-button type="button" (click)="interestedBooks()">Show Books I'm Interested In</button>
-
-<div *ngIf="add">
-  <br>
-  <mat-card>
-    <section class="mat-typography">
-      <h3>Add New Book</h3>
-    </section>
-    <mat-divider></mat-divider>
-    <br>
-    <form [formGroup]="addBookForm" class="addBook-form">
-      <br>
-      <mat-form-field class="field-full-width">
-        <input matInput placeholder="ISBN" formControlName="isbn" #isbn>
-        <mat-error *ngIf="addBookForm.controls['isbn'].errors?.required">
-          ISBN is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="field-full-width">
-        <input matInput placeholder="Title"  formControlName="title" #title>
-        <mat-error *ngIf="addBookForm.controls['title'].errors?.required">
-          Title is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="field-full-width">
-        <input matInput placeholder="Author"  formControlName="author" #author>
-        <mat-error *ngIf="addBookForm.controls['author'].errors?.required">
-          Author is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="field-full-width">
-        <textarea type="text" matInput placeholder="Description" formControlName="description" #description></textarea>
-      </mat-form-field>
-      <mat-form-field class="field-full-width">
-        <input matInput placeholder="Subject" formControlName="subject" #subject>
-      </mat-form-field>
-      <mat-form-field class="field-full-width">
-        <input matInput placeholder="Original Price" formControlName="oprice" #oprice>
-      </mat-form-field>
-      <mat-form-field class="field-full-width">
-        <input matInput placeholder="Current Price" formControlName="cprice" #cprice>
-      </mat-form-field>
-
-      <mat-divider></mat-divider>
-      <br><br>
-      <button mat-button type="button" [disabled]="addBookForm.pristine || addBookForm.invalid" (click)="createBook(isbn.value, title.value, author.value, description.value, subject.value, oprice.value, cprice.value)">Add</button>
-    </form>
-  </mat-card>
-</div>
-
-<div *ngIf="success">
-  <p>Book Added!</p>
-</div>
 
 <div *ngIf="showMemberBooks">
   <br>
@@ -101,13 +49,6 @@
   Book Deleted!
 </div>
 
-<div *ngIf="account">
-  <button mat-button type="button" (click)="displaymajorform()">Update major</button>
-  <button mat-button type="button" (click)="displayphoneform()">Update phone number</button>
-  <button mat-button type="button" (click)="displaynameform()">Update name</button>
-  <button mat-button type="button" (click)="displayinfo()">My profile</button>
-</div>
-
 <div *ngIf="interested">
   <br>
   <mat-card>
@@ -141,82 +82,6 @@
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  </mat-card>
-</div>
-
-<div *ngIf="majorform"> <form [formGroup]="updatemajorform" class="updatemajorform">
-  <p><mat-form-field>
-    <input type="major" matInput placeholder="Major" formControlName="major" #major>
-  </mat-form-field>
-  </p>
-</form>
-  <button mat-button (click)="updatemajor(major.value, uname)" [disabled]="updatemajorform.pristine">Save</button>
-  <button mat-button (click)="cancel()">Cancel</button>
-</div>
-
-<div *ngIf="majorupdated">
-  <font color="blue">Major updated successfully!</font>
-</div>
-
-<div *ngIf="nameform"> <form [formGroup]="updatenameform" class="updatenameform">
-  <p><mat-form-field>
-    <input type="name" matInput placeholder="Name" formControlName="name" #name>
-  </mat-form-field>
-  </p>
-</form>
-  <button mat-button (click)="updatename(name.value, uname)" [disabled]="updatenameform.pristine">Save</button>
-  <button mat-button (click)="cancel()">Cancel</button>
-</div>
-
-<div *ngIf="nameupdated">
-  <font color="blue">Name updated successfully!</font>
-</div>
-
-<div *ngIf="phoneform"> <form [formGroup]="updatephonenumform" class="updatephonenumform">
-  <p><mat-form-field>
-    <input type="phone" matInput placeholder="Phone Number" formControlName="phone" #phone>
-  </mat-form-field>
-  </p>
-</form>
-  <button mat-button (click)="updatephonenum(phone.value, uname)" [disabled]="updatephonenumform.pristine">Save</button>
-  <button mat-button (click)="cancel()">Cancel</button>
-</div>
-
-<div *ngIf="phoneupdated">
-  <font color="blue">Phone number updated successfully!</font>
-</div>
-
-<div *ngIf="info">
-  <mat-card>
-    <table mat-table [dataSource]="data">
-      <ng-container matColumnDef="uname">
-        <th mat-header-cell *matHeaderCellDef> Username </th>
-        <td mat-cell *matCellDef="let element"> {{element.uname}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="major">
-        <th mat-header-cell *matHeaderCellDef> Major </th>
-        <td mat-cell *matCellDef="let element"> {{element.major}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="phone">
-        <th mat-header-cell *matHeaderCellDef> Phone Number </th>
-        <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayMemberColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayMemberColumns"></tr>
     </table>
   </mat-card>
 </div>
