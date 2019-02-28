@@ -58,6 +58,7 @@ export class MemberHomeComponent implements OnInit {
           this.snackBar.open('Book deleted successfully', 'OK', {
               duration: 3000
           });
+          this.router.navigate(['/Member']);
       }
     });
   }
@@ -70,6 +71,7 @@ export class MemberHomeComponent implements OnInit {
           this.snackBar.open('Book deleted successfully', 'OK', {
               duration: 3000
           });
+          this.router.navigate(['/Member']);
       }
     });
   }

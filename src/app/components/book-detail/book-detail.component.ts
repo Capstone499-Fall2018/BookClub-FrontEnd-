@@ -1,34 +1,37 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DBService } from '../../db.service';
 import { SearchComponent } from '../search/search.component';
 import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-book-detail',
   templateUrl: './book-detail.component.html',
   styleUrls: ['./book-detail.component.css']
 })
 export class BookDetailComponent implements OnInit {
-  @Input () searchComponent: SearchComponent;
+  @Input() searchComponent: SearchComponent;
 
-     data: {
-       Title: String,
-       Author: String,
-       listPrice: String,
-       Description: String,
-       memberUname: String
-     };
-     member: {
-       uname: String,
-       name: String,
-       email: String,
-       phone: String
-     };
-     unid: String;
-     show: boolean;
-     displayInfo: boolean;
-     notLoggedIn: boolean;
+  data: {
+    Title: String,
+    Author: String,
+    listPrice: String,
+    Description: String,
+    memberUname: String
+  };
+  member: {
+    uname: String,
+    name: String,
+    email: String,
+    phone: String
+  };
+  unid: String;
+  show: boolean;
+  displayInfo: boolean;
+  notLoggedIn: boolean;
 
-  constructor(private db: DBService, private route: ActivatedRoute) { }
+  constructor(private db: DBService, private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.show = true;
@@ -48,14 +51,22 @@ export class BookDetailComponent implements OnInit {
     const uid = sessionStorage.getItem('userid');
     const jwt = sessionStorage.getItem('user-jwt');
     console.log(uid + ' ' + jwt);
+    if (this.data.memberUname == uid) {
+      this.snackBar.open('This is your own book', 'OK', {
+        duration: 4000
+      });
+      this.router.navigate(['/Search']);
+      return;
+    }
+
     if (/*log.charAt(0) === 'f' ||*/ jwt === null) {
       this.notLoggedIn = true;
     } else {
-        this.db.interested(uid, this.unid).subscribe((res: any) => {
-            this.member = res[0];
-            console.log(this.member);
-            this.displayInfo = true;
-        });
+      this.db.interested(uid, this.unid).subscribe((res: any) => {
+        this.member = res[0];
+        console.log(this.member);
+        this.displayInfo = true;
+      });
     }
   }
 }
