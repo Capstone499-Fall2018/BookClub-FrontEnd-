@@ -2,9 +2,9 @@
 <mat-toolbar color="primary">
   <span>BookClub</span>
   <span class="ex"></span>
-  <span><a href="/Search">Search</a></span>
+  <span><button mat-button routerLink="/Search">Search</button></span>
   <span class="ex1"></span>
-  <span><a href ="/Home">Home</a></span>
+  <span><button mat-button (click)="check()">Home</button></span>
 </mat-toolbar>
 <div>
   <router-outlet></router-outlet>
