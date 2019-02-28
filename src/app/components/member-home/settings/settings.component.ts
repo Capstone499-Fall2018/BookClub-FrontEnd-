@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DBService } from '../../../db.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatTabGroup } from '@angular/material';
 
 @Component({
   selector: 'app-settings',

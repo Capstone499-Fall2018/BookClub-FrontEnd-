@@ -41,7 +41,9 @@
 
       <mat-divider></mat-divider>
       <br><br>
-      <button mat-button type="button" [disabled]="addBookForm.pristine || addBookForm.invalid" (click)="createBook(isbn.value, title.value, author.value, description.value, subject.value, oprice.value, cprice.value)">Add</button>
+      <button mat-button type="button" [disabled]="addBookForm.pristine || addBookForm.invalid"
+              (click)="createBook(isbn.value, title.value, author.value, description.value, subject.value, oprice.value, cprice.value)">Add</button>
+      <button mat-button type="button" routerLink="/Member">Return to member home</button>
     </form>
   </mat-card>
 </div>

@@ -37,7 +37,8 @@
       </mat-form-field>
       <mat-divider></mat-divider>
       <br><br>
-      <button mat-button type="button" [disabled]="registerForm.pristine || registerForm.invalid" (click)="register(username.value, email.value, major.value, name.value, phone.value, password.value)">Register</button>
+      <button mat-button type="button" [disabled]="registerForm.pristine || registerForm.invalid"
+              (click)="register(username.value, email.value, major.value, name.value, phone.value, password.value)">Register</button>
     </form>
   </mat-card>
 </div>
