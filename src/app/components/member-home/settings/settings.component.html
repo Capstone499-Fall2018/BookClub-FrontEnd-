@@ -1,10 +1,10 @@
-<div>
-  <button mat-button type="button" (click)="displaymajorform()">Update major</button>
-  <button mat-button type="button" (click)="displayphoneform()">Update phone number</button>
-  <button mat-button type="button" (click)="displaynameform()">Update name</button>
-  <button mat-button type="button" (click)="displayinfo()">My profile</button>
+<mat-nav-list>
+  <a mat-list-item (click)="displaymajorform()">Update Major</a>
+  <a mat-list-item (click)="displayphoneform()">Update Phone</a>
+  <a mat-list-item (click)="displaynameform()">Update Name</a>
+  <a mat-list-item (click)="displayinfo()">My profile</a>
   <button mat-button type="button" routerLink="/Member">Return to member home</button>
-</div>
+</mat-nav-list>
 
 <div *ngIf="majorform">
   <form [formGroup]="updatemajorform" class="updatemajorform">

@@ -24,19 +24,19 @@ export class HomeComponent implements OnInit {
   login(email, password) {
     this.loginError = false;
     this.db.login(email, password).subscribe((res: any) => {
-      console.log(res);
-      if (res != null) {
-      sessionStorage.setItem('userid', res.Member.uname);
-      sessionStorage.setItem('username', res.Member.name);
-      sessionStorage.setItem('user-jwt', res.token);
-      }
-        },
+        console.log(res);
+        if (res != null) {
+        sessionStorage.setItem('userid', res.Member.uname);
+        sessionStorage.setItem('username', res.Member.name);
+        sessionStorage.setItem('user-jwt', res.token);
+        }
+      },
       error => {
-      this.loginError = true;
+        this.loginError = true;
       },
         () => {
-          this.router.navigate(['/Member']);
-        });
+        this.router.navigate(['/Member']);
+      });
   }
 
   ngOnInit() {
