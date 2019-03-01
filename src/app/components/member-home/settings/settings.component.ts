@@ -46,6 +46,13 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(sessionStorage.getItem('user-jwt') == null) {
+        this.snackBar.open('Please login to view this page', 'OK', {
+          duration: 3000
+        });
+        this.router.navigate(['/Home']);
+      }
+
       this.majorform = false;
       this.nameform = false;
       this.phoneform = false;

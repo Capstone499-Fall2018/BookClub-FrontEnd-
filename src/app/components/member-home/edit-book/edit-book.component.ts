@@ -5,9 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 
 @Component({
-  selector: 'app-edit-book',
-  templateUrl: './edit-book.component.html',
-  styleUrls: ['./edit-book.component.css']
+    selector: 'app-edit-book',
+    templateUrl: './edit-book.component.html',
+    styleUrls: ['./edit-book.component.css']
 })
 export class EditBookComponent implements OnInit {
 
@@ -16,7 +16,7 @@ export class EditBookComponent implements OnInit {
     data: any = {};
 
     constructor(private db: DBService, private fb: FormBuilder, private router: Router,
-                private route: ActivatedRoute, private snackBar: MatSnackBar) {
+        private route: ActivatedRoute, private snackBar: MatSnackBar) {
         this.editBookForm = this.fb.group({
             isbn: ['', Validators.required],
             title: ['', Validators.required],
@@ -30,6 +30,13 @@ export class EditBookComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (sessionStorage.getItem('user-jwt') == null) {
+            this.snackBar.open('Please login to view this page', 'OK', {
+                duration: 3000
+            });
+            this.router.navigate(['/Home']);
+        }
+
         this.route.params.subscribe(params => {
             this.unid = params.unid;
             this.db.getBookDetails(this.unid).subscribe((res: any) => {
@@ -45,10 +52,11 @@ export class EditBookComponent implements OnInit {
                 this.editBookForm.get('url').setValue(this.data.Image_URL);
             });
         });
+
     }
 
     editBook(isbn, title, author, description, subject, cprice, oprice, url) {
-        this.db.editBookDetails(this.unid, isbn, title, author, description, subject, cprice, oprice, url).subscribe( (res: any) => {
+        this.db.editBookDetails(this.unid, isbn, title, author, description, subject, cprice, oprice, url).subscribe((res: any) => {
             this.snackBar.open('Book info updated successfully', 'OK', {
                 duration: 3000
             });

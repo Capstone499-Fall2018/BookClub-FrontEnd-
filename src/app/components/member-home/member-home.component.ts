@@ -30,10 +30,18 @@ export class MemberHomeComponent implements OnInit {
   constructor(private db: DBService, private fb: FormBuilder, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    if(sessionStorage.getItem('user-jwt') == null) {
+      this.snackBar.open('Please login to view this page', 'OK', {
+        duration: 3000
+      });
+      this.router.navigate(['/Home']);
+    }
+
     this.deleteSuccess = false;
     this.showMemberBooks = false;
     this.interested = false;
   }
+
   get userid(): any {
     return sessionStorage.getItem('userid');
   }

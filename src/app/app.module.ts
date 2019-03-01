@@ -32,6 +32,7 @@ const routes: Routes = [
     { path: 'Register', component: RegisterComponent },
     { path: 'Home', component: HomeComponent },
     { path: 'Detail/:unid', component: BookDetailComponent},
+    { path: 'Detail', redirectTo: '/Home'},
     { path: 'Search', component: SearchComponent },
     { path: 'Member', component: MemberHomeComponent },
     { path: 'Edit/:unid', component: EditBookComponent },

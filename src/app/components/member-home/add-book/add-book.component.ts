@@ -25,7 +25,14 @@ export class AddBookComponent implements OnInit {
         });
     }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    if(sessionStorage.getItem('user-jwt') == null) {
+        this.snackBar.open('Please login to view this page', 'OK', {
+          duration: 3000
+        });
+        this.router.navigate(['/Home']);
+      }
+  }
 
   get userid(): any {
       return sessionStorage.getItem('userid');
