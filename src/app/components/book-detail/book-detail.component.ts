@@ -47,11 +47,10 @@ export class BookDetailComponent implements OnInit {
 
   interested() {
     this.show = false;
-    const log = sessionStorage.getItem('loggedIn');
     const uid = sessionStorage.getItem('userid');
     const jwt = sessionStorage.getItem('user-jwt');
     console.log(uid + ' ' + jwt);
-    if (this.data.memberUname == uid) {
+    if (this.data.memberUname === uid) {
       this.snackBar.open('This is your own book', 'OK', {
         duration: 4000
       });
@@ -59,12 +58,15 @@ export class BookDetailComponent implements OnInit {
       return;
     }
 
-    if (/*log.charAt(0) === 'f' ||*/ jwt === null) {
+    if (jwt === null) {
       this.notLoggedIn = true;
     } else {
       this.db.interested(uid, this.unid).subscribe((res: any) => {
         this.member = res[0];
         console.log(this.member);
+          this.snackBar.open('Book added to your interested books list', 'OK', {
+              duration: 3000
+          });
         this.displayInfo = true;
       });
     }
