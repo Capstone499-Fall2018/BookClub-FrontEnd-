@@ -18,7 +18,7 @@ import { MatToolbarModule,
     MatTableModule,
     MatDividerModule,
     MatSnackBarModule,
-    MatPaginatorModule} from '@angular/material';
+    MatPaginatorModule } from '@angular/material';
 import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
