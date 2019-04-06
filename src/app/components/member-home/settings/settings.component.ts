@@ -113,9 +113,9 @@ export class SettingsComponent implements OnInit {
         });
     }
 
-    displayinfo(uname) {
+    displayinfo() {
         this.ngOnInit();
-        uname = sessionStorage.getItem('userid');
+        const uname = sessionStorage.getItem('userid');
         this.db.getMember(uname).subscribe((res: any) => {
             console.log(res);
             this.data = res;
