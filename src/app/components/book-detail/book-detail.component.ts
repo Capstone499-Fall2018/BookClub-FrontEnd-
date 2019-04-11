@@ -18,7 +18,8 @@ export class BookDetailComponent implements OnInit {
     Author: String,
     listPrice: String,
     Description: String,
-    memberUname: String
+    memberUname: String,
+    Image_URL: String
   };
   member: {
     uname: String,
