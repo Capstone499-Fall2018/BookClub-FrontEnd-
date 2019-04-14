@@ -21,12 +21,13 @@ export class AddBookComponent implements OnInit {
             subject: '',
             description: '',
             oprice: '',
-            cprice: ''
+            cprice: '',
+            url: ' '
         });
     }
 
-  ngOnInit() { 
-    if(sessionStorage.getItem('user-jwt') == null) {
+  ngOnInit() {
+    if (sessionStorage.getItem('user-jwt') == null) {
         this.snackBar.open('Please login to view this page', 'OK', {
           duration: 3000
         });
@@ -38,9 +39,9 @@ export class AddBookComponent implements OnInit {
       return sessionStorage.getItem('userid');
     }
 
-  createBook(isbn, title, author, description, subject, oprice, cprice) {
+  createBook(isbn, title, author, description, subject, oprice, cprice, url) {
       this.ngOnInit();
-      this.db.createBook(isbn, title, author, description, subject, oprice, cprice, this.userid).subscribe((res: any) => {
+      this.db.createBook(isbn, title, author, description, subject, oprice, cprice, url, this.userid).subscribe((res: any) => {
         console.log(res);
         if (res.affectedRows > 0) {
             this.snackBar.open('Book added successfully', 'OK', {

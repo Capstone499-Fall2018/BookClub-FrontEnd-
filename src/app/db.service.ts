@@ -41,7 +41,7 @@ export class DBService {
       });
    }
    createBook(isbn: String, title: String, author: String, description: String,
-              subject: String, oprice: String, cprice: String, member: String) {
+              subject: String, oprice: String, cprice: String, url: String, member: String) {
       return this.http.put('http://localhost:4000/client/Create', {
           isbn: isbn,
           title: title,
@@ -50,6 +50,7 @@ export class DBService {
           subject: subject,
           oprice: oprice,
           cprice: cprice,
+          url: url,
           member: member
       });
    }

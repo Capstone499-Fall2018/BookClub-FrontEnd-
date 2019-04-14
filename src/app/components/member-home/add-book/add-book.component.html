@@ -27,7 +27,7 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="field-full-width">
-        <textarea type="text" matInput placeholder="Description" formControlName="description" #description></textarea>
+        <textarea type="text" matInput [maxlength]="75" placeholder="Description" formControlName="description" #description></textarea>
       </mat-form-field>
       <mat-form-field class="field-full-width">
         <input matInput placeholder="Subject" formControlName="subject" #subject>
@@ -38,11 +38,14 @@
       <mat-form-field class="field-full-width">
         <input matInput placeholder="Current Price" formControlName="cprice" #cprice>
       </mat-form-field>
+      <mat-form-field class="field-full-width">
+        <input matInput placeholder="Image URL" formControlName="url" #url>
+      </mat-form-field>
 
       <mat-divider></mat-divider>
       <br><br>
       <button mat-button type="button" [disabled]="addBookForm.pristine || addBookForm.invalid"
-              (click)="createBook(isbn.value, title.value, author.value, description.value, subject.value, oprice.value, cprice.value)">Add</button>
+              (click)="createBook(isbn.value, title.value, author.value, description.value, subject.value, oprice.value, cprice.value, url.value)">Add</button>
       <button mat-button type="button" routerLink="/Member">Return to member home</button>
     </form>
   </mat-card>
