@@ -17,6 +17,8 @@ export class SettingsComponent implements OnInit {
     updatenameform: FormGroup;
     phoneform: boolean;
     updatephonenumform: FormGroup;
+    passwordform: boolean;
+    updatepasswordform: FormGroup;
     info: boolean;
     data: {
         Uname: String,
@@ -43,6 +45,11 @@ export class SettingsComponent implements OnInit {
           phone: ['', Validators.required]
 
       });
+
+      this.updatepasswordform = this.fb.group({
+        password: ['', Validators.required]
+
+    });
   }
 
   ngOnInit() {
@@ -56,6 +63,7 @@ export class SettingsComponent implements OnInit {
       this.majorform = false;
       this.nameform = false;
       this.phoneform = false;
+      this.passwordform = false;
       this.info = false;
   }
 
@@ -112,6 +120,25 @@ export class SettingsComponent implements OnInit {
             console.log(res);
         });
     }
+
+    displaypasswordform() {
+        this.ngOnInit();
+        this.passwordform = true;
+    }
+
+    updatepassword(password) {
+        const uname = sessionStorage.getItem('userid');
+        this.db.updatepassword(password, uname).subscribe((res: any) => {
+            if (res.affectedRows > 0) {
+                this.snackBar.open('password updated', 'OK', {
+                    duration: 3000
+                });
+                this.updatepasswordform.reset();
+            }
+            console.log(res);
+        });
+    }
+
 
     displayinfo() {
         this.ngOnInit();
