@@ -51,19 +51,19 @@ export class MemberHomeComponent implements OnInit {
     }
 
     this.db.countInterested(this.userid).subscribe((res: any) => {
-      console.log(res[0]["count (Interested.memberUname)"]);
-      this.checkInterest = res[0]["count (Interested.memberUname)"];
+      console.log(res[0]['count (Interested.memberUname)']);
+      this.checkInterest = res[0]['count (Interested.memberUname)'];
       console.log(this.checkInterest);
-      this.db.getCountInt(this.userid).subscribe((res: any) => {
-        console.log(res[0].InterestedCount);
-        this.countnum = res[0].InterestedCount;
+      this.db.getCountInt(this.userid).subscribe((res1: any) => {
+        console.log(res1[0].InterestedCount);
+        this.countnum = res1[0].InterestedCount;
         console.log(this.countnum);
-        if(this.countnum === null) {
+        if (this.countnum === null) {
           this.countnum = this.checkInterest;
-          console.log("noti1");
+          console.log('noti1');
           this.noti = this.countnum;
-        } else if(this.checkInterest != this.countnum) {
-          if(this.checkInterest > this.countnum) {
+        } else if (this.checkInterest !== this.countnum) {
+          if (this.checkInterest > this.countnum) {
             this.noti = this.checkInterest - this.countnum;
           } else {
             this.noti = this.countnum - this.checkInterest;
@@ -145,8 +145,9 @@ export class MemberHomeComponent implements OnInit {
        this.showNoti = true;
      });
      this.db.updateCount(this.userid).subscribe((res: any) => {
-       if(res.affectedRows > 0)
-          console.log("updated count");
+       if (res.affectedRows > 0) {
+          console.log('updated count');
+       }
      })
      this.noti = 0;
    }

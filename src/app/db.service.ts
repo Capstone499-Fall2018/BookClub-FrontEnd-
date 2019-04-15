@@ -100,11 +100,11 @@ export class DBService {
        });
    }
    updatepassword(password: String, uname: String) {
-    return this.http.put('http://localhost:4000/client/updatepassword', {
-        password: password,
-        uname: uname
-    });
-}
+        return this.http.put('http://localhost:4000/client/updatepassword', {
+            password: password,
+            uname: uname
+        });
+    }
    getMember(uname: String) {
        return this.http.put('http://localhost:4000/client/getmember', {
            uname: uname
