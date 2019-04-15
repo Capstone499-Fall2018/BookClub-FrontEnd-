@@ -129,4 +129,24 @@ export class DBService {
           unid: unid
       });
   }
+  countInterested(uname: String) {
+      return this.http.put('http://localhost:4000/client/count', {
+          uname: uname
+      });
+  }
+  getCountInt(uname: String) {
+      return this.http.put('http://localhost:4000/client/getCount', {
+          uname: uname
+      });
+  }
+  showIntUser(uname: String) {
+      return this.http.put('http://localhost:4000/client/showIntUser', {
+          uname: uname
+      });
+  }
+  updateCount(uname: String) {
+      return this.http.put('http://localhost:4000/client/updateCount', {
+          uname: uname
+      });
+  }
 }

@@ -17,6 +17,13 @@ export class MemberHomeComponent implements OnInit {
     Title: String,
     Author: String
   };
+
+  countnum = 0;
+  checkInterest = 0;
+  noti = 0;
+  showNoti: boolean;
+  count: boolean;
+
   member: any;
   deleteSuccess: boolean;
   showMemberBooks: boolean;
@@ -25,6 +32,12 @@ export class MemberHomeComponent implements OnInit {
     Isbn: String,
     Title: String,
     Author: String
+  };
+
+  displayedColumns1 = ['uname', 'title'];
+  data2: {
+    uname: String,
+    Title: String
   };
 
   constructor(private db: DBService, private fb: FormBuilder, private router: Router, private snackBar: MatSnackBar) { }
@@ -37,9 +50,34 @@ export class MemberHomeComponent implements OnInit {
       this.router.navigate(['/Home']);
     }
 
+    this.db.countInterested(this.userid).subscribe((res: any) => {
+      console.log(res[0]["count (Interested.memberUname)"]);
+      this.checkInterest = res[0]["count (Interested.memberUname)"];
+      console.log(this.checkInterest);
+      this.db.getCountInt(this.userid).subscribe((res: any) => {
+        console.log(res[0].InterestedCount);
+        this.countnum = res[0].InterestedCount;
+        console.log(this.countnum);
+        if(this.countnum === null) {
+          this.countnum = this.checkInterest;
+          console.log("noti1");
+          this.noti = this.countnum;
+        } else if(this.checkInterest != this.countnum) {
+          if(this.checkInterest > this.countnum) {
+            this.noti = this.checkInterest - this.countnum;
+          } else {
+            this.noti = this.countnum - this.checkInterest;
+          }
+          this.countnum = this.checkInterest;
+        }
+      });
+    });
+
     this.deleteSuccess = false;
     this.showMemberBooks = false;
     this.interested = false;
+    this.count = false;
+    this.showNoti = false;
   }
 
   get userid(): any {
@@ -98,5 +136,18 @@ export class MemberHomeComponent implements OnInit {
     sessionStorage.removeItem('username');
     sessionStorage.removeItem('user-jwt');
     this.router.navigate(['/Home']);
+   }
+
+   updateNoti() {
+     this.db.showIntUser(this.userid).subscribe((res: any) => {
+       console.log(res);
+       this.data2 = res;
+       this.showNoti = true;
+     });
+     this.db.updateCount(this.userid).subscribe((res: any) => {
+       if(res.affectedRows > 0)
+          console.log("updated count");
+     })
+     this.noti = 0;
    }
 }
