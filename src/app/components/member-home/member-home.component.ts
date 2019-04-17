@@ -111,7 +111,7 @@ export class MemberHomeComponent implements OnInit {
 
   deleteIntBook(unid) {
     this.ngOnInit();
-    this.db.deleteIntBook(unid).subscribe((res: any) => {
+    this.db.deleteIntBook(unid, this.userid).subscribe((res: any) => {
       console.log(res);
       if (res.affectedRows > 0) {
           this.snackBar.open('Book deleted successfully', 'OK', {
