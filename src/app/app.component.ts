@@ -21,8 +21,9 @@ export class AppComponent implements OnInit {
     check() {
     this.ngOnInit();
       if (this.userjwt != null) {
-          this.router.navigate(['/Member']);
-          window.location.replace('/Member');
+        this.router.navigateByUrl('blank').then(() => {
+          this.router.navigateByUrl('/Member');
+        });
       } else {
         this.router.navigate(['/Home']);
       }

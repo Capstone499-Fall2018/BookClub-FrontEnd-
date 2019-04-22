@@ -38,6 +38,7 @@ const routes: Routes = [
     { path: 'Edit/:unid', component: EditBookComponent },
     { path: 'Add', component: AddBookComponent },
     { path: 'Settings', component: SettingsComponent },
+    { path: 'blank', component: MemberHomeComponent},
     { path: '', redirectTo: '/Home', pathMatch: 'full' }
 ];
 
