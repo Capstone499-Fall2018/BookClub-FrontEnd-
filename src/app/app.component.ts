@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
     this.ngOnInit();
       if (this.userjwt != null) {
           this.router.navigate(['/Member']);
-          window.location.replace("/Member");
+          window.location.replace('/Member');
       } else {
         this.router.navigate(['/Home']);
       }
