@@ -25,7 +25,6 @@ export class MemberHomeComponent implements OnInit {
   count: boolean;
 
   member: any;
-  deleteSuccess: boolean;
   showMemberBooks: boolean;
   displayedColumns = ['isbn', 'title', 'author', 'actions'];
   data1: {
@@ -72,8 +71,6 @@ export class MemberHomeComponent implements OnInit {
         }
       });
     });
-
-    this.deleteSuccess = false;
     this.showMemberBooks = false;
     this.interested = false;
     this.count = false;
@@ -139,6 +136,8 @@ export class MemberHomeComponent implements OnInit {
    }
 
    updateNoti() {
+     this.showMemberBooks = false;
+     this.interested = false;
      this.db.showIntUser(this.userid).subscribe((res: any) => {
        console.log(res);
        this.data2 = res;
