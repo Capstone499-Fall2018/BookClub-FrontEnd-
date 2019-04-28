@@ -1,6 +1,6 @@
 <h3>Welcome home, {{username}}</h3>
 <br><br>
-<button mat-button type="button" routerLink="/Search">Search Books</button>
+<button mat-button type="button" (click)="showSearch()">Search Books</button>
 <button mat-button type="button" routerLink="/Add">Add a Book</button>
 <button mat-button type="button" (click)="manageBooks()">Manage my books</button>
 <button mat-button type="button" routerLink="/Settings">Account Settings</button>
@@ -105,4 +105,8 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </mat-card>
+</div>
+
+<div *ngIf="search">
+  <app-search></app-search>
 </div>

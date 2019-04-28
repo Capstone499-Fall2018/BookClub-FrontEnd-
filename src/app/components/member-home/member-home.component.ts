@@ -11,7 +11,6 @@ import { MatSnackBar } from '@angular/material';
 })
 export class MemberHomeComponent implements OnInit {
 
-  interested: boolean;
   interestedMemberBooks: {
     Isbn: String,
     Title: String,
@@ -23,17 +22,19 @@ export class MemberHomeComponent implements OnInit {
   noti = 0;
   showNoti: boolean;
   count: boolean;
-
+  search: boolean;
+  interested: boolean;
   member: any;
   showMemberBooks: boolean;
   displayedColumns = ['isbn', 'title', 'author', 'actions'];
+  displayedColumns1 = ['uname', 'title'];
+
   data1: {
     Isbn: String,
     Title: String,
     Author: String
   };
 
-  displayedColumns1 = ['uname', 'title'];
   data2: {
     uname: String,
     Title: String
@@ -75,6 +76,7 @@ export class MemberHomeComponent implements OnInit {
     this.interested = false;
     this.count = false;
     this.showNoti = false;
+    this.search = false;
   }
 
   get userid(): any {
@@ -149,5 +151,11 @@ export class MemberHomeComponent implements OnInit {
        }
      })
      this.noti = 0;
+   }
+
+   showSearch() {
+    this.ngOnInit();
+
+    this.search = true;
    }
 }
