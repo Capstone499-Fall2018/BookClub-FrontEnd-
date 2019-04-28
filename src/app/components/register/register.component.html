@@ -23,7 +23,34 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="field-full-width">
-        <input matInput placeholder="Major in school" formControlName="major" #major>
+        <mat-label>Major</mat-label>
+        <!-- <input matInput placeholder="Major in school" formControlName="major" #major> -->
+        <select matNativeControl formControlName="major" #major>
+          <option value="Anthropology">Anthropology</option>
+          <option value="Art + Design">Art + Design</option>
+          <option value="Biology">Biology</option>
+          <option value="Business">Business</option>
+          <option value="Chemistry">Chemistry</option>
+          <option value="Communication">Communication</option>
+          <option value="Computer Science">Computer Science</option>
+          <option value="Economics">Economics</option>
+          <option value="French">French</option>
+          <option value="English">English</option>
+          <option value="Education">Education</option>
+          <option value="Spanish">Spanish</option>
+          <option value="German">German</option>
+          <option value="Global Studies">Global Studies</option>
+          <option value="History">History</option>
+          <option value="Kinesiology">Kinesiology</option>
+          <option value="Math">Math</option>
+          <option value="Music">Music</option>
+          <option value="Physics">Physics</option>
+          <option value="Nursing">Nursing</option>
+          <option value="Philosophy">Philosophy</option>
+          <option value="Psychology">Psychology</option>
+          <option value="Religion">Religion</option>
+          <option value="Theatre">Theatre</option>
+        </select>
       </mat-form-field>
       <mat-form-field class="field-full-width">
         <input matInput placeholder="Name" formControlName="name" #name>
