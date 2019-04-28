@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(sessionStorage.getItem('user-jwt'));
+    console.log("User-JWT: ",sessionStorage.getItem('user-jwt'));
     if ( sessionStorage.getItem('user-jwt') === null) {
       this.show = true;
     } else {
