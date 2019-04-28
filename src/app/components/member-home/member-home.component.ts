@@ -22,10 +22,13 @@ export class MemberHomeComponent implements OnInit {
   noti = 0;
   showNoti: boolean;
   count: boolean;
-  search: boolean;
   interested: boolean;
   member: any;
-  showMemberBooks: boolean;
+  search: boolean;
+  memberBooks: boolean;
+  addBook: boolean;
+  settings: boolean;
+
   displayedColumns = ['isbn', 'title', 'author', 'actions'];
   displayedColumns1 = ['uname', 'title'];
 
@@ -72,11 +75,13 @@ export class MemberHomeComponent implements OnInit {
         }
       });
     });
-    this.showMemberBooks = false;
+    this.memberBooks = false;
     this.interested = false;
     this.count = false;
     this.showNoti = false;
     this.search = false;
+    this.addBook = false;
+    this.settings = false;
   }
 
   get userid(): any {
@@ -86,9 +91,9 @@ export class MemberHomeComponent implements OnInit {
     return sessionStorage.getItem('username');
   }
 
-  manageBooks() {
+  showMemberBooks() {
     this.ngOnInit();
-    this.showMemberBooks = true;
+    this.memberBooks = true;
     this.db.getMemberBooks(this.userid).subscribe((res: any) => {
       console.log(res);
       this.data1 = res;
@@ -103,7 +108,7 @@ export class MemberHomeComponent implements OnInit {
           this.snackBar.open('Book deleted successfully', 'OK', {
               duration: 3000
           });
-          this.manageBooks();
+          this.showMemberBooks();
       }
     });
   }
@@ -121,7 +126,7 @@ export class MemberHomeComponent implements OnInit {
     });
   }
 
-  interestedBooks() {
+  showInterestedBooks() {
     this.ngOnInit();
     this.db.interestedMember(this.userid).subscribe((res: any) => {
       this.interestedMemberBooks = res;
@@ -138,7 +143,7 @@ export class MemberHomeComponent implements OnInit {
    }
 
    updateNoti() {
-     this.showMemberBooks = false;
+     this.memberBooks = false;
      this.interested = false;
      this.db.showIntUser(this.userid).subscribe((res: any) => {
        console.log(res);
@@ -157,5 +162,17 @@ export class MemberHomeComponent implements OnInit {
     this.ngOnInit();
 
     this.search = true;
+   }
+
+   showAddBook() {
+    this.ngOnInit();
+
+    this.addBook = true;
+   }
+
+   showSettings() {
+    this.ngOnInit();
+
+    this.settings = true;
    }
 }

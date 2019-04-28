@@ -1,11 +1,11 @@
 <h3>Welcome home, {{username}}</h3>
 <br><br>
 <button mat-button type="button" (click)="showSearch()">Search Books</button>
-<button mat-button type="button" routerLink="/Add">Add a Book</button>
-<button mat-button type="button" (click)="manageBooks()">Manage my books</button>
-<button mat-button type="button" routerLink="/Settings">Account Settings</button>
+<button mat-button type="button" (click)="showAddBook()">Add a Book</button>
+<button mat-button type="button" (click)="showMemberBooks()">Manage my books</button>
+<button mat-button type="button" (click)="showSettings()">Account Settings</button>
 <button mat-button type="button" (click)="logout()">Logout</button>
-<button mat-button type="button" (click)="interestedBooks()">Show Books I'm Interested In</button>
+<button mat-button type="button" (click)="showInterestedBooks()">Show Books I'm Interested In</button>
 
 <div>
   <button mat-button type="button" (click)="updateNoti()">Notifications</button>
@@ -32,7 +32,7 @@
   </mat-card>
 </div>
 
-<div *ngIf="showMemberBooks">
+<div *ngIf="memberBooks">
   <br>
   <mat-card>
     <br><br>
@@ -109,4 +109,12 @@
 
 <div *ngIf="search">
   <app-search></app-search>
+</div>
+
+<div *ngIf="addBook">
+  <app-add-book></app-add-book>
+</div>
+
+<div *ngIf="settings">
+  <app-settings></app-settings>
 </div>
