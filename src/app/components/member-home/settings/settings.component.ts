@@ -101,6 +101,9 @@ export class SettingsComponent implements OnInit {
             }
             console.log(res);
         });
+        this.router.navigateByUrl('blank').then(() => {
+          this.router.navigateByUrl('/Member');
+        });
     }
 
     displayphoneform() {

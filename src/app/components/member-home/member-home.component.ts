@@ -75,6 +75,12 @@ export class MemberHomeComponent implements OnInit {
         }
       });
     });
+    this.db.getMember(this.userid).subscribe((res: any) => {
+        console.log(res[0]["name"]);
+        if(sessionStorage.getItem('userid') !== res[0]["name"]) {
+          sessionStorage.setItem('username', res[0]["name"]);
+        }
+    });
     this.memberBooks = false;
     this.interested = false;
     this.count = false;
