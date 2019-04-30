@@ -62,13 +62,31 @@ export class BookDetailComponent implements OnInit {
     if (jwt === null) {
       this.notLoggedIn = true;
     } else {
-      this.db.interested(uid, this.unid).subscribe((res: any) => {
-        this.member = res[0];
-        console.log(this.member);
-          this.snackBar.open('Book added to your interested books list', 'OK', {
+      this.db.interestedMember(uid).subscribe((res: any) => {
+        console.log(res);
+        let exist: boolean = false;
+        for(var i = 0; i < res.length; i++) {
+          console.log(res[i]["unid"]);
+          console.log('bookid ' + this.unid);
+          if(this.unid == res[i]["unid"]) {
+            exist = true;
+          }
+        }
+        if(exist) {
+          this.snackBar.open('You are already interested in this book', 'OK', {
               duration: 3000
           });
-        this.displayInfo = true;
+          this.ngOnInit();
+        } else {
+          this.db.interested(uid, this.unid).subscribe((res: any) => {
+            this.member = res[0];
+            console.log(this.member);
+              this.snackBar.open('Book added to your interested books list', 'OK', {
+                  duration: 3000
+              });
+            this.displayInfo = true;
+          });
+        }
       });
     }
   }
