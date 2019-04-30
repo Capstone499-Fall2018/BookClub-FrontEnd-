@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(uname, email, major, name, phone, password) {
-    //email verification
+    // email verification
     if (email.includes(" ") || !(email.includes("@")) || !(email.includes(".com")
       || !(email.includes(".edu")) || !(email.includes(".org")))) {
         this.snackBar.open('Your email did not meet the requirements, try again', 'OK', {
@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
         return;
     }
 
-    //password verification
+    // password verification
     if (password.includes(" ") || password.length < 3 || password.length > 18) {
       this.snackBar.open('Your password did not meet the requirements, try again.', 'OK', {
         duration: 3000
@@ -47,12 +47,18 @@ export class RegisterComponent implements OnInit {
 
     this.db.register(uname, email, major, name, phone, password).subscribe((res: any) => {
       console.log(res);
+      if (res === false) {
+        console.log('here');
+          this.snackBar.open('This username already exists, try another', 'OK', {
+              duration: 3000
+          });
+      }
       if (res.affectedRows > 0) {
         this.snackBar.open('Registered successfully', 'OK', {
           duration: 3000
         });
+          this.router.navigate(['/Home']);
       }
     });
-    this.router.navigate(['/Home']);
   }
 }
