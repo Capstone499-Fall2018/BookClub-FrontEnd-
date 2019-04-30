@@ -94,15 +94,15 @@ export class SettingsComponent implements OnInit {
         uname = sessionStorage.getItem('userid');
         this.db.updatename(name, uname).subscribe((res: any) => {
             if (res.affectedRows > 0) {
+                this.router.navigateByUrl('blank').then(() => {
+                  this.router.navigateByUrl('/Member');
+                });
                 this.snackBar.open('Name Updated', 'OK', {
                     duration: 3000
                 });
                 this.updatenameform.reset();
             }
             console.log(res);
-        });
-        this.router.navigateByUrl('blank').then(() => {
-          this.router.navigateByUrl('/Member');
         });
     }
 
