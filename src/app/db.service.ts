@@ -7,31 +7,31 @@ import { HttpClient } from '@angular/common/http';
 export class DBService {
   constructor(private http: HttpClient) { }
   getBooks() {
-    return this.http.get('http://localhost:4000/client/Book');
+    return this.http.get('http://152.117.218.112:4000/client/Book');
 
   }
   login(email: String, pw: String) {
-    return this.http.put('http://localhost:4000/verify/login', {
+    return this.http.put('http://152.117.218.112:4000/verify/login', {
         email: email,
         password: pw
     });
    }
    searchAll() {
-      return this.http.get('http://localhost:4000/client/All');
+      return this.http.get('http://152.117.218.112:4000/client/All');
    }
    search(type: String, value: String) {
-     return this.http.put('http://localhost:4000/client/Book', {
+     return this.http.put('http://152.117.218.112:4000/client/Book', {
          type: type,
          value: value
      });
    }
    searchDetail(unid: String) {
-      return this.http.put('http://localhost:4000/client/Detail', {
+      return this.http.put('http://152.117.218.112:4000/client/Detail', {
           unid: unid
       });
    }
    register(uname: String, email: String, major: String, name: String, phone: String, password: String) {
-      return this.http.put('http://localhost:4000/verify/register', {
+      return this.http.put('http://152.117.218.112:4000/verify/register', {
           uname: uname,
           email: email,
           major: major,
@@ -42,7 +42,7 @@ export class DBService {
    }
    createBook(isbn: String, title: String, author: String, description: String,
               subject: String, oprice: String, cprice: String, url: String, member: String) {
-      return this.http.put('http://localhost:4000/client/Create', {
+      return this.http.put('http://152.117.218.112:4000/client/Create', {
           isbn: isbn,
           title: title,
           author: author,
@@ -55,65 +55,65 @@ export class DBService {
       });
    }
    getMemberBooks(member: String) {
-      return this.http.put('http://localhost:4000/client/Memberbooks', {
+      return this.http.put('http://152.117.218.112:4000/client/Memberbooks', {
           member: member
       });
    }
    delete(unid: String) {
-      return this.http.put('http://localhost:4000/client/Delete', {
+      return this.http.put('http://152.117.218.112:4000/client/Delete', {
           unid: unid
       });
    }
    deleteIntBook(unid: String, uname: String) {
-      return this.http.put('http://localhost:4000/client/DeleteIntBook', {
+      return this.http.put('http://152.117.218.112:4000/client/DeleteIntBook', {
           unid: unid,
           uname: uname
       });
    }
    interested(member: String, book: String) {
-      return this.http.put('http://localhost:4000/client/Interested', {
+      return this.http.put('http://152.117.218.112:4000/client/Interested', {
           member: member,
           book: book,
           auth_token: sessionStorage.getItem('user-jwt')
       });
    }
    interestedMember(member: String) {
-      return this.http.put('http://localhost:4000/client/MemberIntBooks', {
+      return this.http.put('http://152.117.218.112:4000/client/MemberIntBooks', {
           member: member
       });
    }
    updatemajor(major: String, uname: String) {
-       return this.http.put('http://localhost:4000/client/updatemajor', {
+       return this.http.put('http://152.117.218.112:4000/client/updatemajor', {
            major: major,
            uname: uname
        });
    }
    updatename(name: String, uname: String) {
-       return this.http.put('http://localhost:4000/client/updatename', {
+       return this.http.put('http://152.117.218.112:4000/client/updatename', {
            name: name,
            uname: uname
        });
    }
    updatephonenum(phone: String, uname: String) {
-       return this.http.put('http://localhost:4000/client/updatephonenum', {
+       return this.http.put('http://152.117.218.112:4000/client/updatephonenum', {
            phone: phone,
            uname: uname
        });
    }
    updatepassword(password: String, uname: String) {
-        return this.http.put('http://localhost:4000/client/updatepassword', {
+        return this.http.put('http://152.117.218.112:4000/client/updatepassword', {
             password: password,
             uname: uname
         });
     }
    getMember(uname: String) {
-       return this.http.put('http://localhost:4000/client/getmember', {
+       return this.http.put('http://152.117.218.112:4000/client/getmember', {
            uname: uname
        });
    }
    editBookDetails(unid: String, isbn: String, title: String, author: String, description:
        String, subject: String, cprice: String, oprice: String, url: String) {
-      return this.http.put('http://localhost:4000/client/editBookDetails', {
+      return this.http.put('http://152.117.218.112:4000/client/editBookDetails', {
           unid: unid,
           isbn: isbn,
           title: title,
@@ -126,27 +126,27 @@ export class DBService {
       });
   }
   getBookDetails(unid: String) {
-      return this.http.put('http://localhost:4000/client/getBookDetails', {
+      return this.http.put('http://152.117.218.112:4000/client/getBookDetails', {
           unid: unid
       });
   }
   countInterested(uname: String) {
-      return this.http.put('http://localhost:4000/client/count', {
+      return this.http.put('http://152.117.218.112:4000/client/count', {
           uname: uname
       });
   }
   getCountInt(uname: String) {
-      return this.http.put('http://localhost:4000/client/getCount', {
+      return this.http.put('http://152.117.218.112:4000/client/getCount', {
           uname: uname
       });
   }
   showIntUser(uname: String) {
-      return this.http.put('http://localhost:4000/client/showIntUser', {
+      return this.http.put('http://152.117.218.112:4000/client/showIntUser', {
           uname: uname
       });
   }
   updateCount(uname: String) {
-      return this.http.put('http://localhost:4000/client/updateCount', {
+      return this.http.put('http://152.117.218.112:4000/client/updateCount', {
           uname: uname
       });
   }
