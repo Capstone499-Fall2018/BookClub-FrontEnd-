@@ -52,8 +52,12 @@ export class RegisterComponent implements OnInit {
           this.snackBar.open('This username already exists, try another', 'OK', {
               duration: 3000
           });
+      } else {
+        this.snackBar.open(res.errors, 'OK', {
+            duration: 3000
+        });
       }
-      if (res.affectedRows > 0) {
+      if (res.length === 1) {
         this.snackBar.open('Registered successfully', 'OK', {
           duration: 3000
         });

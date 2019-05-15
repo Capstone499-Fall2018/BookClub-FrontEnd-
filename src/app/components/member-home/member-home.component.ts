@@ -162,6 +162,7 @@ export class MemberHomeComponent implements OnInit {
        }
      })
      this.noti = 0;
+     this.ngOnInit();
    }
 
    showSearch() {
